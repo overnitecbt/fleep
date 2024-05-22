@@ -11,12 +11,13 @@ def acceptable_files(uploaded_file, allowed_extensions, allowed_mimes, allowed_t
 
     allowed_extensions = list(map(remove_period, allowed_extensions))
     
-    # Virus Test
+    # VIRUS TEST
     hashed_file = hashlib.sha256()
     data = uploaded_file.read()
     hashed_file.update(data)
     uploaded_file_hash = hashed_file.hexdigest()
-    # test_hash = "094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d"
+    # test hash (known virus hash)
+    # uploaded_file_hash = "094fd325049b8a9cf6d3e5ef2a6d4cc6a567d7d49c35f8bb8dd9e3c6acf3d78d"
     data = {
         'query': 'get_info',
         'hash': ''+uploaded_file_hash+'',
@@ -38,7 +39,7 @@ def acceptable_files(uploaded_file, allowed_extensions, allowed_mimes, allowed_t
         else:
             raise Exception("Unknown error. Try again later.")
     
-    # Regex Extension and Name Test
+    # REGEX EXTENSION AND NAME TEST
     def remove_period(i):
         k = i.split('.')
         return k[1]
@@ -54,7 +55,7 @@ def acceptable_files(uploaded_file, allowed_extensions, allowed_mimes, allowed_t
     uploded_mime = uploaded_file.content_type
     uploded_extension = uploaded_file.file.name.split('.')[-1]
 
-    # File Typing Test
+    # FILE TYPING TEST
     with open(uploaded_file , "rb") as file:
         info = get(file.read(128))
         info_type = info[0].type
