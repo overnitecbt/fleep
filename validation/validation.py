@@ -1,4 +1,9 @@
-# MEDIA FUNCTIONS
+import hashlib
+import requests
+import json
+from fleep import get
+import re 
+
 def acceptable_files(file, extensions, mimes, types):
     # Virus Test
     hashed_file = hashlib.sha256()
@@ -46,7 +51,7 @@ def acceptable_files(file, extensions, mimes, types):
 
     # File Typing Test
     with open(file_path , "rb") as file_2:
-        info = fleep.get(file_2.read(128))
+        info = get(file_2.read(128))
         info_type = info[0].type
         info_extension = info[0].extension
         info_mime = info[0].mime
