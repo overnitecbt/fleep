@@ -5,6 +5,8 @@
 Description: File format determination library
 Author: Mykyta Paliienko
 License: MIT
+
+Modified by: Claire Alverson
 """
 
 

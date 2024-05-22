@@ -1,10 +1,10 @@
 import hashlib
 import requests
 import json
-from fleep import get
+from fleep.__init__ import get
 import re 
 
-def acceptable_files(uploaded_file, allowed_extensions, allowed_mimes, allowed_types, allowed_size):
+def acceptable_file(uploaded_file, allowed_extensions, allowed_mimes, allowed_types, allowed_size):
     def remove_period(i):
         k = i.split('.')
         return k[1]
@@ -56,7 +56,7 @@ def acceptable_files(uploaded_file, allowed_extensions, allowed_mimes, allowed_t
     uploded_extension = uploaded_file.file.name.split('.')[-1]
 
     # FILE TYPING TEST
-    with open(uploaded_file , "rb") as file:
+    with open(uploaded_file_path , "rb") as file:
         info = get(file.read(128))
         info_type = info[0].type
         info_extension = info[0].extension
